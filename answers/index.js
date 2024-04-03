@@ -21,25 +21,22 @@ const quotes = [
     "Everything youve ever wanted is on the other side of fear. - George Addair"
   ];
 
+const usedIndexes = new Set()
+const quoteElement = document.getElementById('quote')
 
-const usedIndexes = new Set();
-const pquote = document.getElementById('quote');
+function generateQuote() {
+    if (usedIndexes.size >= quotes.length) {
+        usedIndexes.clear()
+    }
 
-function quotegen() {
-  if(usedIndexes.size >= quotes.length){
-    usedIndexes.clear()
-  }
+    while (true) {
+        const randomIdx = Math.floor(Math.random() * quotes.length)
 
-  while (true) {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
+        if(usedIndexes.has(randomIdx)) continue
 
-    if(usedIndexes.has(randomIndex)) continue
-    const quote = quotes[randomIndex]
-    pquote.innerHTML = quote;
-    usedIndexes.add(randomIndex)
-  }
-  
-
+        const quote = quotes[randomIdx]
+        quoteElement.innerHTML = quote;
+        usedIndexes.add(randomIdx)
+        break
+    }
 }
-  
-  
